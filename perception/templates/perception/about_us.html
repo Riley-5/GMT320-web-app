@@ -1,0 +1,22 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | About Us
+{% endblock %}
+
+{% block body %}
+    <div id="about-container">
+        <div id="gmt320"></div>
+        <div id="vision-statement"></div>
+        <div id="hatfield-project"></div>
+        <div id="security"></div>
+        <div class="member"></div>
+        <div class="member"></div>
+        <div class="member"></div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'perception/index.js' %}"></script>
+{% endblock %}

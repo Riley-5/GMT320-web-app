@@ -1,0 +1,22 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | Blog
+{% endblock %}
+
+{% block body %}
+    <div id="blog-container">
+        <div id="map-title"></div>
+        <div id="map-container">
+            <div class="static-map"></div>
+            <div class="static-map"></div>
+        </div>
+        <div id="blog-title"></div>
+        <div id="blogs"></div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'perception/index.js' %}"></script>
+{% endblock %}

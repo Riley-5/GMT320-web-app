@@ -1,0 +1,27 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | Home
+{% endblock %}
+
+{% block body %}
+    <div id="home-container">
+        <img src="{% static 'perception/images/home_hatfield.jpg' %}" alt="Home Background" style="height: 565px;">
+        <div id="home-text">
+            VISION STATEMENT <br>
+            BLUH <br>
+            BLUH
+        </div>
+        <form action="{% url 'index' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" id ="csv_file" name="csv_file">
+            <input type="submit" value="Uplaod">
+        </form>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'perception/index.js' %}"></script>
+{% endblock %}
+
