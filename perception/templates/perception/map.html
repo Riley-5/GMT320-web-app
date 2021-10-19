@@ -6,6 +6,16 @@
 {% endblock %}
 
 {% block body %}
+    <div id="input-form">
+        {% if message %}
+            <div id="message">{{ message }}</div>
+        {% endif %}
+        <form action="{% url 'map' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" id ="csv_file" name="csv_file">
+            <input type="submit" value="Upload">
+        </form>
+    </div>
     <div id="side-bar"></div>
     <div id="map"></div>
     <div id="line-graph"></div>

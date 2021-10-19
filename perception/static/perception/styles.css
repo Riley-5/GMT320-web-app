@@ -61,6 +61,10 @@ body {
 
 /* Map page */
 
+#message {
+    color: white;
+}
+
 #side-bar {
     background-color: aqua;
     height: 325px;
