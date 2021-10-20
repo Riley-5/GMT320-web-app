@@ -1,0 +1,19 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | Load Data
+{% endblock %}
+
+{% block body %}
+    <div id="input-form">
+        {% if message %}
+            <div id="message">{{ message }}</div>
+        {% endif %}
+        <form action="{% url 'load_data' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input class="btn btn-outline-light btn-sm" type="file" id ="csv_file" name="csv_file" accept=".csv">
+            <input class="btn btn-outline-light btn-sm" type="submit" value="Upload" id="submit-button">
+        </form>
+    </div>
+{% endblock %}

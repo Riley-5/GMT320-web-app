@@ -6,7 +6,7 @@ import csv, io
 
 # Create your views here.
 
-def index(request): # Error check and validate the fuck out of this
+def index(request):
     return render(request, "perception/index.html")
 
 def about_us(request):
@@ -21,10 +21,10 @@ def documents(request):
 def contact(request):
     return render(request, "perception/contact.html")
 
-def map(request):
+def load_data(request):
     if request.method == "GET":
-        return render(request, "perception/map.html")
-
+        return render(request, "perception/load_data.html")
+    
     if request.method == "POST":
         try:
             csv_file = request.FILES["csv_file"]
@@ -47,12 +47,13 @@ def map(request):
                     )
                 return render(request, "perception/map.html")
             else:
-                return render(request, "perception/map.html", {
+                return render(request, "perception/load_data.html", {
                     "message": "Please Upload a CSV File"
                 })
         except:
-            return render(request, "perception/map.html", {
+            return render(request, "perception/load_data.html", {
                 "message": "Please Upload a File"
             })
 
+def map(request):
     return render(request, "perception/map.html")
