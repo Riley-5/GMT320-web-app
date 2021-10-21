@@ -37,13 +37,14 @@ def load_data(request):
                 for column in csv.reader(io_string, delimiter = ',', quotechar = "|"):
                     _, created = Crime.objects.update_or_create(
                         year = int(column[0]),
-                        street_name = column[1],
-                        attempted_murder = int(column[2]),
-                        sexual_assault = int(column[3]),
-                        vehicle_theft = int(column[4]),
-                        shoplifting = int(column[5]),
-                        drunk_driving = int(column[6]),
-                        damage_to_property = int(column[7])
+                        street_id = int(column[1]),
+                        street_name = column[2],
+                        attempted_murder = int(column[3]),
+                        sexual_assault = int(column[4]),
+                        vehicle_theft = int(column[5]),
+                        shoplifting = int(column[6]),
+                        drunk_driving = int(column[7]),
+                        damage_to_property = int(column[8])
                     )
                 return render(request, "perception/map.html")
             else:
@@ -61,6 +62,11 @@ def crime_data(request):
         year_list = []
         for year in years:
             year_list.append(year)
+
+        street_ids = Crime.objects.values_list('street_id', flat = True)
+        street_id_list = []
+        for street_id in street_ids:
+            street_id_list.append(street_id)
 
         street_names = Crime.objects.values_list('street_name', flat = True)
         street_name_list = []
@@ -97,8 +103,9 @@ def crime_data(request):
         for damage_to_property in damage_to_properties:
             damage_to_property_list.append(damage_to_property)
 
-        crime_data = [{
+        crime_data = {
             'year': year_list,
+            'street_id': street_id_list,
             'street_name': street_name_list,
             'attempted_murder': attempted_murder_list,
             'sexual_assault': sexual_assault_list,
@@ -106,7 +113,7 @@ def crime_data(request):
             'shoplifting': shoplifting_list,
             'drunk_driving': drunk_driving_list,
             'damage_to_property': damage_to_property_list
-        }]
+        }
 
         return JsonResponse(crime_data, safe = False)   
 
