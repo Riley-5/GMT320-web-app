@@ -58,66 +58,44 @@ def load_data(request):
 
 def crime_data(request):
     if request.method == "GET":
-        years = Crime.objects.values_list('year', flat = True)
-        year_list = []
-        for year in years:
-            year_list.append(year)
-
-        street_ids = Crime.objects.values_list('street_id', flat = True)
-        street_id_list = []
-        for street_id in street_ids:
-            street_id_list.append(street_id)
-
-        street_names = Crime.objects.values_list('street_name', flat = True)
-        street_name_list = []
-        for street_name in street_names:
-            street_name_list.append(street_name)
-
-        attempted_murders = Crime.objects.values_list('attempted_murder', flat = True)
-        attempted_murder_list = []
-        for attempted_murder in attempted_murders:
-            attempted_murder_list.append(attempted_murder)
-
-        sexual_assaults = Crime.objects.values_list('sexual_assault', flat = True)
-        sexual_assault_list = []
-        for sexual_assault in sexual_assaults:
-            sexual_assault_list.append(sexual_assault)
-
-        vehicle_thefts = Crime.objects.values_list('vehicle_theft', flat = True)
-        vehicle_theft_list = []
-        for vehicle_theft in vehicle_thefts:
-            vehicle_theft_list.append(vehicle_theft)
-
-        shopliftings = Crime.objects.values_list('shoplifting', flat = True)
-        shoplifting_list = []
-        for shoplifting in shopliftings:
-            shoplifting_list.append(shoplifting)
-
-        drunk_drivings = Crime.objects.values_list('drunk_driving', flat = True)
-        drunk_driving_list = []
-        for drunk_driving in drunk_drivings:
-            drunk_driving_list.append(drunk_driving)
-
-        damage_to_properties = Crime.objects.values_list('damage_to_property', flat = True)
-        damage_to_property_list = []
-        for damage_to_property in damage_to_properties:
-            damage_to_property_list.append(damage_to_property)
+        year = list(Crime.objects.values_list('year', flat = True))
+        street_id = list(Crime.objects.values_list('street_id', flat = True))
+        street_name = list(Crime.objects.values_list('street_name', flat = True))
+        attempted_murder = list(Crime.objects.values_list('attempted_murder', flat = True))
+        sexual_assault = list(Crime.objects.values_list('sexual_assault', flat = True))
+        vehicle_theft = list(Crime.objects.values_list('vehicle_theft', flat = True))
+        shoplifting = list(Crime.objects.values_list('shoplifting', flat = True))
+        drunk_driving = list(Crime.objects.values_list('drunk_driving', flat = True))
+        damage_to_property = list(Crime.objects.values_list('damage_to_property', flat = True))
 
         crime_data = {
-            'year': year_list,
-            'street_id': street_id_list,
-            'street_name': street_name_list,
-            'attempted_murder': attempted_murder_list,
-            'sexual_assault': sexual_assault_list,
-            'vehicle_theft': vehicle_theft_list,
-            'shoplifting': shoplifting_list,
-            'drunk_driving': drunk_driving_list,
-            'damage_to_property': damage_to_property_list
+            'year': year,
+            'street_id': street_id,
+            'street_name': street_name,
+            'attempted_murder': attempted_murder,
+            'attempted_murder_total': sum(attempted_murder),
+            'sexual_assault': sexual_assault,
+            'sexual_assault_total': sum(sexual_assault),
+            'vehicle_theft': vehicle_theft,
+            'vehicle_theft_total': sum(vehicle_theft),
+            'shoplifting': shoplifting,
+            'shoplifting_total': sum(shoplifting),
+            'drunk_driving': drunk_driving,
+            'drunk_driving_total': sum(drunk_driving),
+            'damage_to_property': damage_to_property,
+            'damage_to_property_total': sum(damage_to_property),
         }
 
         return JsonResponse(crime_data, safe = False)   
 
-
+def total_crimes(request):
+    if request.method == "GET":
+        street_names = Crime.objects.values_list('street_name', flat = True)
+        sum_crime_street = {}
+        for name in street_names:
+            street_crime_sum = Crime.objects.filter(street_name = name).values_list('attempted_murder', 'sexual_assault', 'vehicle_theft', 'shoplifting', 'drunk_driving', 'damage_to_property')
+            sum_crime_street[name] = sum(street_crime_sum[0])
+        return JsonResponse(sum_crime_street, safe = False)
 
 def map(request):
     return render(request, "perception/map.html")

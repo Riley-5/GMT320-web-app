@@ -66,7 +66,7 @@ body {
 }
 
 #side-bar {
-    background-color: white;
+    background-color: black;
     height: 325px;
     width: 350px;
     float: left;
@@ -79,14 +79,14 @@ body {
 }
 
 #line-graph {
-    background-color: red;
+    background-color: black;
     min-height: 162.5px;
     min-width: 440px;
     float: left;
 }
 
 #pie-chart {
-    background-color: green;
+    background-color: black;
     min-height: 162.5px;
     min-width: 440px;
     float: left;
