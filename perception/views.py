@@ -94,7 +94,7 @@ def total_crimes(request):
         sum_crime_street = {}
         for name in street_names:
             street_crime_sum = Crime.objects.filter(street_name = name).values_list('attempted_murder', 'sexual_assault', 'vehicle_theft', 'shoplifting', 'drunk_driving', 'damage_to_property')
-            sum_crime_street[name] = sum(street_crime_sum[0])
+            sum_crime_street[(name.replace(" ", "_")).lower()] = sum(street_crime_sum[0])
         return JsonResponse(sum_crime_street, safe = False)
 
 def map(request):

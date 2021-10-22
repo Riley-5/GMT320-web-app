@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     getData();
-    addMap();
 });
 
 function getData() {
@@ -25,20 +24,22 @@ function getData() {
     .then(response => response.json())
     .then(totalCrimeStreet => {
         console.log(totalCrimeStreet);
+        graphsCrimeStreet(totalCrimeStreet);
+        addMap(totalCrimeStreet);
     });
 }
 
-function addMap() {
+function addMap(totalCrimesPerStreet) {
     var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 15);
 
     var darkTheme = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
 	    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(hatfieldMap);
 
-    addWFSLayer(hatfieldMap);
+    addWFSLayer(hatfieldMap, totalCrimesPerStreet);
 }
 
-function addWFSLayer(map) {
+function addWFSLayer(map, crimePerStreetTotal) {
     var owsrootUrl = 'http://geodev.co.za:8080/geoserver/group4/ows';
 
     var defaultParameters = {
@@ -62,12 +63,48 @@ function addWFSLayer(map) {
         success: function(response) {
             WFSLayer = L.geoJson(response, {
                 style: function(feature) {
-                    return {
-                        stroke: true,
-                        weight: 2,
-                        color: 'red'
-                    };
-                },
+                    var name = feature.properties.streetname;
+                    var value;
+                    
+                    // double check if new year stakcs or only shows for latest year
+                    switch (name) {
+                        case "Arcadia Street": value = crimePerStreetTotal.arcadia_street; break;
+                        case "Athlone Street": value = crimePerStreetTotal.athlone_street; break;
+                        case "Burnett Street": value = crimePerStreetTotal.burnett_street; break;
+                        case "End Street": value = crimePerStreetTotal.end_street; break;
+                        case "Festival Street": value = crimePerStreetTotal.festival_street; break;
+                        case "Francis Baard Street": value = crimePerStreetTotal.francis_baard_street; break;
+                        case "Glyn Street South": value = crimePerStreetTotal.glyn_street_south; break;
+                        case "Gordon Road": value = crimePerStreetTotal.gordon_road; break;
+                        case "Grosvenor Street": value = crimePerStreetTotal.grosvenor_street; break;
+                        case "Hartbeestspruit Street": value = crimePerStreetTotal.hartbeestspruit_street; break;
+                        case "Hilda Street": value = crimePerStreetTotal.hilda_street; break;
+                        case "Jan Shoba Street": value = crimePerStreetTotal.jan_shoba_street; break;
+                        case "Park Street": value = crimePerStreetTotal.park_street; break;
+                        case "Pretoriues Street": value = crimePerStreetTotal.pretorius_street; break;
+                        case "Prospect Street": value = crimePerStreetTotal.prospect_street; break;
+                        case "Richard Street": value = crimePerStreetTotal.richard_street; break;
+                        case "South Street": value = crimePerStreetTotal.south_street; break;
+                        case "Stanza Bopabe Street": value = crimePerStreetTotal.stanza_bobape_street; break;
+                        default: value = 0;
+                    }
+
+                    if (value >= 100) {
+                        return {
+                            color: 'red'
+                        }
+                    } 
+                    else if (value < 80) {
+                        return {
+                            color: 'green'
+                        }
+                    } 
+                    else {
+                        return {
+                            color: 'orange'
+                        }
+                    }
+                }
             }).addTo(map);
             popUp(WFSLayer);
         }
@@ -207,6 +244,35 @@ function graphsCrime(crimeData) {
     });
 }
 
-
+function graphsCrimeStreet(totalCrimeStreet) {
+    // Pie chart
+    var ctx = document.querySelector('#canvas-pie-chart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Arcadia Street', 'Athlone Street', 'Burnett Street', 'End Street', 'Festival Street', 'Francis Baard Street', 'Glyn Street South', 'Gordon Road', 'Grosvenor Street', 'Hartbeestspruit Street', 'Hilda Street', 'Jan Schoba Street', 'Park Street', 'Pretorius Street', 'Prospect Street', 'Richard Street', 'South Street', 'Stanza Bobape Street'],
+            datasets: [{
+                data: [totalCrimeStreet.arcadia_street, totalCrimeStreet.athlone_street, totalCrimeStreet.burnett_street, totalCrimeStreet.end_street, totalCrimeStreet.festival_street, totalCrimeStreet.francis_baard_street, totalCrimeStreet.glyn_street_south, totalCrimeStreet.gordon_road, totalCrimeStreet.grosvenor_street, totalCrimeStreet.hartbeestspruit_street, totalCrimeStreet.hilda_street, totalCrimeStreet.jan_schoba_street, totalCrimeStreet.park_street, totalCrimeStreet.pretorius_street, totalCrimeStreet.prospect_street, totalCrimeStreet.richard_street, totalCrimeStreet.south_street, totalCrimeStreet.stanza_bobape_street],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth: 1
+            }],
+        }
+    });
+}
                     
                     
