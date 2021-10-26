@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.db.models import Max
 from .models import *
 import csv, io
 
@@ -46,7 +47,7 @@ def load_data(request):
                         drunk_driving = int(column[7]),
                         damage_to_property = int(column[8])
                     )
-                return render(request, "perception/map.html")
+                return HttpResponseRedirect(reverse('map'))
             else:
                 return render(request, "perception/load_data.html", {
                     "message": "Please Upload a CSV File"
@@ -90,10 +91,10 @@ def crime_data(request):
 
 def total_crimes(request):
     if request.method == "GET":
-        street_names = Crime.objects.values_list('street_name', flat = True)
+        street_names = Crime.objects.values_list('street_name', flat = True).order_by('-id')[:19]
         sum_crime_street = {}
         for name in street_names:
-            street_crime_sum = Crime.objects.filter(street_name = name).values_list('attempted_murder', 'sexual_assault', 'vehicle_theft', 'shoplifting', 'drunk_driving', 'damage_to_property')
+            street_crime_sum = Crime.objects.filter(street_name = name).values_list('attempted_murder', 'sexual_assault', 'vehicle_theft', 'shoplifting', 'drunk_driving', 'damage_to_property').order_by('-id')[:19]
             sum_crime_street[(name.replace(" ", "_")).lower()] = sum(street_crime_sum[0])
         return JsonResponse(sum_crime_street, safe = False)
 

@@ -13,4 +13,4 @@ class Crime(models.Model):
     damage_to_property = models.IntegerField(null = True)
 
     def __str__(self):
-        return f"{self.street_id} | {self.street_name}"
+        return f"{self.street_id} | {self.year} | {self.street_name}"

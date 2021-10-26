@@ -11,7 +11,6 @@ function getData() {
     })
     .then(response => response.json())
     .then(crimeData => {
-        console.log(crimeData);
         graphsCrime(crimeData);
     });
 
@@ -23,30 +22,33 @@ function getData() {
     })
     .then(response => response.json())
     .then(totalCrimeStreet => {
-        console.log(totalCrimeStreet);
         graphsCrimeStreet(totalCrimeStreet);
         addMap(totalCrimeStreet);
     });
 }
 
 function addMap(totalCrimesPerStreet) {
-    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 15);
+    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 14);
 
     var darkTheme = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
 	    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
     }).addTo(hatfieldMap);
 
-    addWFSLayer(hatfieldMap, totalCrimesPerStreet);
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+
+    addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
 }
 
-function addWFSLayer(map, crimePerStreetTotal) {
-    var owsrootUrl = 'http://geodev.co.za:8080/geoserver/group4/ows';
+function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
+    var owsrootUrl = 'http://geolive.co.za:8080/geoserver/githubbers/ows';
 
     var defaultParameters = {
         service: 'WFS',
         version: '1.0.0',
         request: 'GetFeature',
-        typeName: 'group4:Hatfield_roads_min',
+        typeName: 'githubbers:roads',
         outputFormat: 'application/json',
         format_options: 'callback:getJson',
         SrsName: 'EPSG:4326'
@@ -81,11 +83,11 @@ function addWFSLayer(map, crimePerStreetTotal) {
                         case "Hilda Street": value = crimePerStreetTotal.hilda_street; break;
                         case "Jan Shoba Street": value = crimePerStreetTotal.jan_shoba_street; break;
                         case "Park Street": value = crimePerStreetTotal.park_street; break;
-                        case "Pretoriues Street": value = crimePerStreetTotal.pretorius_street; break;
+                        case "Pretorius Street": value = crimePerStreetTotal.pretorius_street; break;
                         case "Prospect Street": value = crimePerStreetTotal.prospect_street; break;
                         case "Richard Street": value = crimePerStreetTotal.richard_street; break;
                         case "South Street": value = crimePerStreetTotal.south_street; break;
-                        case "Stanza Bopabe Street": value = crimePerStreetTotal.stanza_bobape_street; break;
+                        case "Stanza Bobape Street": value = crimePerStreetTotal.stanza_bobape_street; break;
                         default: value = 0;
                     }
 
@@ -107,14 +109,28 @@ function addWFSLayer(map, crimePerStreetTotal) {
                 }
             }).addTo(map);
             popUp(WFSLayer);
+            layerController(map, darkTheme, osm, WFSLayer);
         }
     });
 }
 
-function popUp(streets) {    
-    streets.eachLayer(function (layer) {
+function popUp(roads) {    
+    roads.eachLayer(function (layer) {
         layer.bindPopup(layer.feature.properties.streetname);
     });
+}
+
+function layerController(map, darkTheme, osm, WFSLayer) {
+    var baseMaps = {
+        "Dark Theme": darkTheme,
+        "OSM": osm
+    }
+
+    var overlayMaps = {
+        "Roads": WFSLayer
+    }
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map);
 }
 
 function graphsCrime(crimeData) {
