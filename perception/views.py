@@ -22,6 +22,9 @@ def documents(request):
 def contact(request):
     return render(request, "perception/contact.html")
 
+
+
+# load_data function receive a csv file from the form and loops through the data adding it to the database
 def load_data(request):
     if request.method == "GET":
         return render(request, "perception/load_data.html")
@@ -47,16 +50,22 @@ def load_data(request):
                         drunk_driving = int(column[7]),
                         damage_to_property = int(column[8])
                     )
+                # If succesful load the map page with the new data in the database
                 return HttpResponseRedirect(reverse('map'))
             else:
+                # If file is not a csv display message
                 return render(request, "perception/load_data.html", {
                     "message": "Please Upload a CSV File"
                 })
         except:
+            # If upload button pressed with no file attached display message
             return render(request, "perception/load_data.html", {
                 "message": "Please Upload a File"
             })
 
+# crime_data function queries the database for year, street_id, street_name, attempted_murder, sexual_assault, vehicle_theft, shoplifting, drunk_driving and damage_to_property
+# These items are turned into a list 
+# a JSON object is created and returned 
 def crime_data(request):
     if request.method == "GET":
         year = list(Crime.objects.values_list('year', flat = True))
@@ -89,6 +98,9 @@ def crime_data(request):
 
         return JsonResponse(crime_data, safe = False)   
 
+# Function gets the most recent years data in the database (19 streets total)
+# Loops through the names and sums the all the crimes for that road
+# returns a JSON object with the crime total for that street
 def total_crimes(request):
     if request.method == "GET":
         street_names = Crime.objects.values_list('street_name', flat = True).order_by('-id')[:19]

@@ -38,6 +38,10 @@ function addMap(totalCrimesPerStreet) {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
+    hatfieldMap.on('mousemove', function(e) {
+        document.querySelector('#coordinates').innerHTML = `Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`;
+    })
+
     addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
 }
 
@@ -68,7 +72,12 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
                     var name = feature.properties.streetname;
                     var value;
                     
-                    // double check if new year stakcs or only shows for latest year
+                    if (JSON.stringify(crimePerStreetTotal) === '{}') {
+                        return {
+                            color: 'green'
+                        }
+                    }
+
                     switch (name) {
                         case "Arcadia Street": value = crimePerStreetTotal.arcadia_street; break;
                         case "Athlone Street": value = crimePerStreetTotal.athlone_street; break;

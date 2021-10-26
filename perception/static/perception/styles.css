@@ -78,6 +78,10 @@ body {
     float: left;
 }
 
+#coordinates {
+    background-color: white;
+}
+
 #line-graph {
     background-color: black;
     min-height: 162.5px;
