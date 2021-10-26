@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getData() {
+    // Fetches data for each individual street and crime. Aslo returns the total crime for a specific crime
     fetch('/crime_data', {
         headers: {
             'Accept': 'application/json',
@@ -14,6 +15,7 @@ function getData() {
         graphsCrime(crimeData);
     });
 
+    // Fetches individual street crime totals -> for each street total crime 
     fetch('/total_crimes', {
         headers: {
             'Accept': 'application/json',
@@ -38,6 +40,7 @@ function addMap(totalCrimesPerStreet) {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
+    // Mouse moves over map displays the coordinates
     hatfieldMap.on('mousemove', function(e) {
         document.querySelector('#coordinates').innerHTML = `Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`;
     })
@@ -71,13 +74,18 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
                 style: function(feature) {
                     var name = feature.properties.streetname;
                     var value;
-                    
+
+                    // If returned object is empty color roads green
                     if (JSON.stringify(crimePerStreetTotal) === '{}') {
                         return {
                             color: 'green'
                         }
                     }
 
+                    // sets the color according to how much crime is on the street
+                    // Crime >= 100 then color = red
+                    // 80 <= Crime < 100 then color = orange
+                    // Crime < 80 then color = green
                     switch (name) {
                         case "Arcadia Street": value = crimePerStreetTotal.arcadia_street; break;
                         case "Athlone Street": value = crimePerStreetTotal.athlone_street; break;
@@ -123,12 +131,14 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
     });
 }
 
+// When road clicked on display the road name
 function popUp(roads) {    
     roads.eachLayer(function (layer) {
         layer.bindPopup(layer.feature.properties.streetname);
     });
 }
 
+// Layer controller to toggle between basemaps and overlay maps
 function layerController(map, darkTheme, osm, WFSLayer) {
     var baseMaps = {
         "Dark Theme": darkTheme,
@@ -144,6 +154,7 @@ function layerController(map, darkTheme, osm, WFSLayer) {
 
 function graphsCrime(crimeData) {
     // Side bar chart
+    // Chart shows the total crime for each crime recorded
     var ctx = document.querySelector('#canvas-side-bar').getContext('2d');
     var myChart = new Chart(ctx, {
         data: {
@@ -181,6 +192,7 @@ function graphsCrime(crimeData) {
     });
 
     // Line graph
+    // Graph shows the total crime for each crime recorded over time
     let line_data = [{x: 'Attempted Murder', y: crimeData.attempted_muder_total}, {x: 'Damage to Property', y: crimeData.damage_to_property_total}, {x: 'Drunk Driving', y: crimeData.drunk_driving_total}, {x: 'Sexual Assault', y: crimeData.sexual_assault_total}, {x: 'Shoplifting', y: crimeData.shoplifting_total}, {x: 'Vehicle Theft', y: crimeData.vehicle_theft_total}]
     var ctx2 = document.querySelector('#canvas-line-graph').getContext('2d');
     var myChart = new Chart(ctx2, {
@@ -271,6 +283,7 @@ function graphsCrime(crimeData) {
 
 function graphsCrimeStreet(totalCrimeStreet) {
     // Pie chart
+    // Chart shows the most recent crimes totalled per street in the database
     var ctx = document.querySelector('#canvas-pie-chart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'pie',
