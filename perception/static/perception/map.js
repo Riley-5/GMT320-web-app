@@ -28,7 +28,6 @@ function getData() {
         addMap(totalCrimeStreet);
     });
 }
-<button onclick=fullScreenView()>View in full screen</button>
 
 function addMap(totalCrimesPerStreet) {
     var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 14);
@@ -153,9 +152,11 @@ function layerController(map, darkTheme, osm, WFSLayer) {
     L.control.layers(baseMaps, overlayMaps).addTo(map);
 }
 
-     var mapId= document.getElementById('map')
-     function fullScreenView(){
-          mapId.requestFullscreen();
+// When "View full screen" button clicked the map will take up the whole page
+function fullScreenView() {
+    var map = document.querySelector('#map');
+    map.requestFullscreen();
+}
 	     
 	     
 function graphsCrime(crimeData) {
@@ -318,5 +319,3 @@ function graphsCrimeStreet(totalCrimeStreet) {
         }
     });
 }
-                    
-                    
