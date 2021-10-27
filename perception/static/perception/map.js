@@ -41,9 +41,9 @@ function addMap(totalCrimesPerStreet) {
     });
 
     // Mouse moves over map displays the coordinates
-    hatfieldMap.on('mousemove', function(e) {
+    hatfieldMap.addEventListener('mousemove', function(e) {
         document.querySelector('#coordinates').innerHTML = `Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`;
-    })
+    }) 
 
     addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
 }
@@ -318,4 +318,4 @@ function graphsCrimeStreet(totalCrimeStreet) {
             }],
         }
     });
-}
+} 

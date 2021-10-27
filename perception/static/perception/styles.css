@@ -66,41 +66,34 @@ body {
 }
 
 #side-bar {
-    background-color: black;
-    height: 325px;
-    width: 350px;
+    background-color: aqua;
+    height: 80vh;
+    width: 31vw;
     float: left;
 }
 
 #map {
-    height: 325px;
-    width: 550px;
+    height: 80vh;
+    width: 35vw;
+    float: left;
+}
+
+#line-graph {
+    background-color: red;
+    height: 40vh;
+    width: 32vw;
+    float: left;
+}
+
+#pie-chart {
+    background-color: green;
+    height: 40vh;
+    width: 32vw;
     float: left;
 }
 
 #coordinates {
     background-color: white;
-}
-
-#line-graph {
-    background-color: black;
-    min-height: 162.5px;
-    min-width: 440px;
-    float: left;
-}
-
-#pie-chart {
-    background-color: black;
-    min-height: 162.5px;
-    min-width: 440px;
-    float: left;
-}
-
-#bar-graph {
-    background-color: yellow;
-    min-height: 240px;
-    min-width: 1340px;
-    float: left;
 }
 
 /* Home page */
