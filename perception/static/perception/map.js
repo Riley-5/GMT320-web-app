@@ -30,7 +30,7 @@ function getData() {
 }
 
 function addMap(totalCrimesPerStreet) {
-    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 15);
+    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 14);
     hatfieldMap.doubleClickZoom.disable();
 
     var darkTheme = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -42,23 +42,34 @@ function addMap(totalCrimesPerStreet) {
     });
 
     // Mouse moves over map displays the coordinates
-    hatfieldMap.addEventListener('mousemove', function(e) {
-        document.querySelector('#coordinates').innerHTML = `Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`;
-    }) 
+    mouseOverCoordinates(hatfieldMap);
 
     // Double click to full screen 
     // If in full screen double click to exit
-    hatfieldMap.addEventListener('dblclick', () => {
-        var map = document.querySelector('#map');
+    doubleClickFUllscreen(hatfieldMap);
+    
+    addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
+}
+
+// Mouse moves over map displays the coordinates
+function mouseOverCoordinates(map) {
+    map.addEventListener('mousemove', function(e) {
+        document.querySelector('#coordinates').innerHTML = `Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`;
+    });
+}
+
+// Double click to full screen 
+// If in full screen double click to exit
+function doubleClickFUllscreen(map) {
+    map.addEventListener('dblclick', () => {
+        var mapDiv = document.querySelector('#map');
         if (document.fullscreenElement) {
             document.exitFullscreen();
         }
         else {
-            map.requestFullscreen();
+            mapDiv.requestFullscreen();
         }
     });
-
-    addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
 }
 
 function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
