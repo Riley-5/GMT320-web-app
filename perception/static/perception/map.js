@@ -30,7 +30,8 @@ function getData() {
 }
 
 function addMap(totalCrimesPerStreet) {
-    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 14);
+    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 15);
+    hatfieldMap.doubleClickZoom.disable();
 
     var darkTheme = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
 	    attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
@@ -44,6 +45,12 @@ function addMap(totalCrimesPerStreet) {
     hatfieldMap.addEventListener('mousemove', function(e) {
         document.querySelector('#coordinates').innerHTML = `Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`;
     }) 
+
+    // Double click to full screen
+    hatfieldMap.addEventListener('dblclick', () => {
+        var map = document.querySelector('#map');
+        map.requestFullscreen();
+    })
 
     addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
 }
@@ -151,13 +158,6 @@ function layerController(map, darkTheme, osm, WFSLayer) {
 
     L.control.layers(baseMaps, overlayMaps).addTo(map);
 }
-
-// When "View full screen" button clicked the map will take up the whole page
-function fullScreenView() {
-    var map = document.querySelector('#map');
-    map.requestFullscreen();
-}
-	     
 	     
 function graphsCrime(crimeData) {
     // Side bar chart

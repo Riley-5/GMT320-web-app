@@ -6,17 +6,22 @@
 {% endblock %}
 
 {% block body %}
-    <div id="side-bar">
-        <canvas id="canvas-side-bar"></canvas>
+    <div id="top-over">
+        <div id="side-bar">
+            <canvas id="canvas-side-bar"></canvas>
+        </div>
+        <div id="map"></div>
+        <div id="line-graph">
+            <canvas id="canvas-line-graph"></canvas>
+        </div>
+        <div id="pie-chart">
+            <canvas id="canvas-pie-chart"></canvas>
+        </div>
     </div>
-    <div id="map"></div>
-    <!-- <div id="coordinates"></div> -->
-    <!-- <button class="btn btn-outline-light btn-sm" onclick=fullScreenView()>View in full screen</button> -->
-    <div id="line-graph">
-        <canvas id="canvas-line-graph"></canvas>
-    </div>
-    <div id="pie-chart">
-        <canvas id="canvas-pie-chart"></canvas>
+    <div id="down-under">
+        <div id="coordinates">
+            Lat: Lon:
+        </div>
     </div>
 {% endblock %}
 

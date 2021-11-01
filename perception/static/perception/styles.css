@@ -66,7 +66,7 @@ body {
 }
 
 #side-bar {
-    background-color: aqua;
+    background-color: black;
     height: 80vh;
     width: 31vw;
     float: left;
@@ -79,21 +79,22 @@ body {
 }
 
 #line-graph {
-    background-color: red;
+    background-color: black;
     height: 40vh;
     width: 32vw;
     float: left;
 }
 
 #pie-chart {
-    background-color: green;
+    background-color: black;
     height: 40vh;
     width: 32vw;
     float: left;
 }
 
 #coordinates {
-    background-color: white;
+    text-align: center;
+    color: white;
 }
 
 /* Home page */
