@@ -46,11 +46,17 @@ function addMap(totalCrimesPerStreet) {
         document.querySelector('#coordinates').innerHTML = `Lat: ${e.latlng.lat} Lng: ${e.latlng.lng}`;
     }) 
 
-    // Double click to full screen
+    // Double click to full screen 
+    // If in full screen double click to exit
     hatfieldMap.addEventListener('dblclick', () => {
         var map = document.querySelector('#map');
-        map.requestFullscreen();
-    })
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        }
+        else {
+            map.requestFullscreen();
+        }
+    });
 
     addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
 }
