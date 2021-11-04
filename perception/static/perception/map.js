@@ -273,6 +273,12 @@ function graphsCrime(crimeData) {
 function graphsCrimeStreet(totalCrimeStreet) {
     // Side bar chart
     // Chart shows the total crime for each street
+    var chartColors = {
+        red: 'rgba(255, 0, 0)',
+        orange: 'rgba(255, 105, 0)',
+        green: 'rgba(0, 255, 0)'
+    };
+
     var ctx = document.querySelector('#canvas-side-bar').getContext('2d');
     var barChart = new Chart(ctx, {
         data: {
@@ -310,5 +316,20 @@ function graphsCrimeStreet(totalCrimeStreet) {
         },
     });
 
-    barChart.render();
+    // Conditional colours for bar graph to match roads
+    var colorChangeValue = 50;
+    var dataset = barChart.data.datasets[0];
+    for (var i = 0; i < dataset.data.length; i++) {
+        if (dataset.data[i] >= 100) {
+            dataset.backgroundColor[i] = chartColors.red;
+        }
+        else if (dataset.data[i] < 80) {
+            dataset.backgroundColor[i] = chartColors.green;
+        }
+        else {
+            dataset.backgroundColor[i] = chartColors.orange;
+        }
+        console.log(i);
+    }
+    barChart.update();
 } 
