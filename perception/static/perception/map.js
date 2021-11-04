@@ -188,10 +188,10 @@ function graphsCrime(crimeData) {
                 label: 'Attempted Murder',
                 data: crimeData.attempted_muder,
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 0, 0)',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 0, 0)',
                 ],
                 borderWidth: 1,
                 yAxisID: 'y'
@@ -201,69 +201,93 @@ function graphsCrime(crimeData) {
                 label: 'Damage to Property',
                 data: crimeData.damage_to_property,
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(0, 66, 255)',
                 ],
                 borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(0, 66, 255)',
                 ],
                 borderWidth: 1,
-                yAxisID: 'y1'
+                yAxisID: 'y'
             },
             {
                 type: 'line',
                 label: 'Drunk Driving',
                 data: crimeData.drunk_driving,
                 backgroundColor: [
-                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(31, 255, 0)',
                 ],
                 borderColor: [
-                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(31, 255, 0)',
                 ],
                 borderWidth: 1,
-                yAxisID: 'y1'
+                yAxisID: 'y'
             },
             {
                 type: 'line',
                 label: 'Sexual Assault',
                 data: crimeData.sexual_assault,
                 backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(236, 255, 0)',
                 ],
                 borderColor: [
-                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(236, 255, 0)',
                 ],
                 borderWidth: 1,
-                yAxisID: 'y1'
+                yAxisID: 'y'
             },
             {
                 type: 'line',
                 label: 'Shoplifting',
                 data: crimeData.shoplifting,
                 backgroundColor: [
-                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 0, 170)',
                 ],
                 borderColor: [
-                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 0, 170)',
                 ],
                 borderWidth: 1,
-                yAxisID: 'y1'
+                yAxisID: 'y'
             },
             {
                 type: 'line',
                 label: 'Vehicle Theft',
                 data: crimeData.vehicle_theft,
                 backgroundColor: [
-                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 255, 255)',
                 ],
                 borderColor: [
-                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 255, 255)',
                 ],
                 borderWidth: 1,
-                yAxisID: 'y1'
+                yAxisID: 'y'
             }],
         },
         options: {
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Crime Count Over Time',
+                    color: 'white'
+                },
+                legend: {
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: 'white'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'white'
+                    }
+                }
+            }
         }
     });
 
@@ -310,14 +334,33 @@ function graphsCrimeStreet(totalCrimeStreet) {
             plugins: {
                 legend: {
                     display: false
+                },
+                title: {
+                    display: true,
+                    text: 'Total Crime Per Street',
+                    color: 'white'
                 }
             },
-            maintainAspectRatio: false
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    grid: {
+                        color: 'white'
+                    },
+                    ticks: {
+                        color: 'white'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: 'white'
+                    }
+                }
+            }
         },
     });
 
     // Conditional colours for bar graph to match roads
-    var colorChangeValue = 50;
     var dataset = barChart.data.datasets[0];
     for (var i = 0; i < dataset.data.length; i++) {
         if (dataset.data[i] >= 100) {
@@ -329,7 +372,6 @@ function graphsCrimeStreet(totalCrimeStreet) {
         else {
             dataset.backgroundColor[i] = chartColors.orange;
         }
-        console.log(i);
     }
     barChart.update();
 } 
