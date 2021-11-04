@@ -67,29 +67,27 @@ body {
 
 #side-bar {
     background-color: black;
-    height: 80vh;
+    height: 55vh;
     width: 31vw;
+    float: left;
+}
+#map-container {
+    background-color: black;
+    height: 55vh;
+    width: 35vw;
     float: left;
 }
 
 #map {
-    height: 80vh;
+    height: 50vh;
     width: 35vw;
     float: left;
 }
 
 #line-graph {
     background-color: black;
-    height: 40vh;
-    width: 32vw;
-    float: left;
-}
-
-#pie-chart {
-    background-color: black;
-    height: 40vh;
-    width: 32vw;
-    float: left;
+    height: 30vh;
+    width: auto;
 }
 
 #coordinates {

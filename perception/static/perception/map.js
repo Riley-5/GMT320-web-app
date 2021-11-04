@@ -62,12 +62,12 @@ function mouseOverCoordinates(map) {
 // If in full screen double click to exit
 function doubleClickFUllscreen(map) {
     map.addEventListener('dblclick', () => {
-        var mapDiv = document.querySelector('#map');
+        var map = document.querySelector('#map');
         if (document.fullscreenElement) {
             document.exitFullscreen();
         }
         else {
-            mapDiv.requestFullscreen();
+            map.requestFullscreen();
         }
     });
 }
@@ -99,7 +99,7 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
                     var name = feature.properties.streetname;
                     var value;
 
-                    // If returned object is empty color roads green
+                    // If returned object is empty => color roads green
                     if (JSON.stringify(crimePerStreetTotal) === '{}') {
                         return {
                             color: 'green'
@@ -177,49 +177,10 @@ function layerController(map, darkTheme, osm, WFSLayer) {
 }
 	     
 function graphsCrime(crimeData) {
-    // Side bar chart
-    // Chart shows the total crime for each crime recorded
-    var ctx = document.querySelector('#canvas-side-bar').getContext('2d');
-    var myChart = new Chart(ctx, {
-        data: {
-            labels: ['Attempted Murder', 'Damage to Property', 'Drunk Driving', 'Sexual Assualt', 'Shoplifting', 'Vehicle Theft'],
-            datasets: [{
-                type: 'bar',
-                data: [crimeData.attempted_muder_total, crimeData.damage_to_property_total, crimeData.drunk_driving_total, crimeData.sexual_assault_total, crimeData.shoplifting_total, crimeData.vehicle_theft_total],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderWidth: 1
-            }],
-        },
-        options: {
-            indexAxis: 'y',
-            plugins: {
-                legend: {
-                    display: false
-                }
-            }
-        },
-    });
-
     // Line graph
     // Graph shows the total crime for each crime recorded over time
-    let line_data = [{x: 'Attempted Murder', y: crimeData.attempted_muder_total}, {x: 'Damage to Property', y: crimeData.damage_to_property_total}, {x: 'Drunk Driving', y: crimeData.drunk_driving_total}, {x: 'Sexual Assault', y: crimeData.sexual_assault_total}, {x: 'Shoplifting', y: crimeData.shoplifting_total}, {x: 'Vehicle Theft', y: crimeData.vehicle_theft_total}]
     var ctx2 = document.querySelector('#canvas-line-graph').getContext('2d');
-    var myChart = new Chart(ctx2, {
+    var lineChart = new Chart(ctx2, {
         data: {
             labels: crimeData.year,
             datasets: [{
@@ -301,20 +262,24 @@ function graphsCrime(crimeData) {
                 yAxisID: 'y1'
             }],
         },
-        stacked: false
+        options: {
+            maintainAspectRatio: false
+        }
     });
+
+    lineChart.render();
 }
 
 function graphsCrimeStreet(totalCrimeStreet) {
-    // Pie chart
-    // Chart shows the most recent crimes totalled per street in the database
-    var ctx = document.querySelector('#canvas-pie-chart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'pie',
+    // Side bar chart
+    // Chart shows the total crime for each street
+    var ctx = document.querySelector('#canvas-side-bar').getContext('2d');
+    var barChart = new Chart(ctx, {
         data: {
-            labels: ['Arcadia Street', 'Athlone Street', 'Burnett Street', 'End Street', 'Festival Street', 'Francis Baard Street', 'Glyn Street South', 'Gordon Road', 'Grosvenor Street', 'Hartbeestspruit Street', 'Hilda Street', 'Jan Schoba Street', 'Park Street', 'Pretorius Street', 'Prospect Street', 'Richard Street', 'South Street', 'Stanza Bobape Street'],
+            labels: Object.keys(totalCrimeStreet),
             datasets: [{
-                data: [totalCrimeStreet.arcadia_street, totalCrimeStreet.athlone_street, totalCrimeStreet.burnett_street, totalCrimeStreet.end_street, totalCrimeStreet.festival_street, totalCrimeStreet.francis_baard_street, totalCrimeStreet.glyn_street_south, totalCrimeStreet.gordon_road, totalCrimeStreet.grosvenor_street, totalCrimeStreet.hartbeestspruit_street, totalCrimeStreet.hilda_street, totalCrimeStreet.jan_schoba_street, totalCrimeStreet.park_street, totalCrimeStreet.pretorius_street, totalCrimeStreet.prospect_street, totalCrimeStreet.richard_street, totalCrimeStreet.south_street, totalCrimeStreet.stanza_bobape_street],
+                type: 'bar',
+                data: Object.values(totalCrimeStreet),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -333,6 +298,17 @@ function graphsCrimeStreet(totalCrimeStreet) {
                 ],
                 borderWidth: 1
             }],
-        }
+        },
+        options: {
+            indexAxis: 'y',
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            maintainAspectRatio: false
+        },
     });
+
+    barChart.render();
 } 
