@@ -67,26 +67,26 @@ body {
 
 #side-bar {
     background-color: black;
-    height: 55vh;
+    height: 58vh;
     width: 31vw;
     float: left;
 }
 #map-container {
     background-color: black;
-    height: 55vh;
+    height: 58vh;
     width: 35vw;
     float: left;
 }
 
 #map {
-    height: 50vh;
+    height: 53vh;
     width: 35vw;
     float: left;
 }
 
 #line-graph {
     background-color: black;
-    height: 30vh;
+    height: 28vh;
     width: auto;
 }
 
