@@ -16,6 +16,12 @@ def about_us(request):
 def blog(request):
     return render(request, "perception/blog.html")
 
+def blog_one(request):
+    return render(request, "perception/blog_one.html")
+
+def blog_two(request):
+    return render(request, "perception/blog_two.html")
+
 def documents(request):
     return render(request, "perception/documents.html")
 
@@ -112,3 +118,4 @@ def total_crimes(request):
 
 def map(request):
     return render(request, "perception/map.html")
+
