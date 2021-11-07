@@ -116,6 +116,36 @@ body {
     align-items: center;
 }
 
+/* About us page */
+
+#about-us-text-parent {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Contact us page */
+
+#contact-text-parent {
+    width: 45vw;
+    height: 85vh;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    float: left;
+}
+
+#contact-form {
+    height: 85vh;
+    width: 50vw;
+    float: right;
+    color: white;
+}
+
 /* Blog page */
 
 #blog-title {

@@ -14,3 +14,13 @@ class Crime(models.Model):
 
     def __str__(self):
         return f"{self.street_id} | {self.year} | {self.street_name}"
+
+class Contact(models.Model):
+    name = models.CharField(max_length = 100)
+    email_address = models.EmailField(max_length = 254)
+    phone_number = models.IntegerField()
+    subject = models.CharField(max_length = 500)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.name} | {self.email_address}"

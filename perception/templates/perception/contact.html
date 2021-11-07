@@ -6,6 +6,34 @@
 {% endblock %}
 
 {% block body %}
+    <div id="contact-container">
+        <div id="contact-text-parent">
+            <div id="contact-text-child">
+                <h1>Get in Touch</h1>
+                <p>
+                    We are happy to hear from you. Contact us today to learn more about our project
+                </p>
+                <br>
+                <p>
+                    Hatfield, South Africa
+                </p>
+                <br>
+                <p>
+                    githubbers07@gmail.com
+                </p>
+                <br>
+                <p>123-456-7890</p>
+            </div>
+        </div>
+        <div id="contact-form">
+            <form action="{% url 'contact' %}" method="post">
+                {% csrf_token %}
+                {{ contact_form }}
+                <br>
+                <button class="btn btn-outline-light btn-sm" type="submit">Submit</button>
+            </form>
+        </div> 
+    </div>
 {% endblock %}
 
 {% block script %}

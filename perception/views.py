@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.db.models import Max
 from .models import *
+from .forms import ContactForm
+from django.contrib import messages
 import csv, io, operator
 
 # Create your views here.
@@ -26,7 +28,17 @@ def documents(request):
     return render(request, "perception/documentation.html")
 
 def contact(request):
-    return render(request, "perception/contact.html")
+    # If form is received
+    if request.method == "POST":
+        contact_form = ContactForm(request.POST)
+        if contact_form.is_valid():
+            contact_form.save()
+    
+    # New instance of form
+    contact_form = ContactForm()
+    return render(request, "perception/contact.html", {
+        "contact_form": ContactForm
+    })
 
 
 
