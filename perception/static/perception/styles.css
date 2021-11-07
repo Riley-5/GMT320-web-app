@@ -146,6 +146,22 @@ body {
     color: white;
 }
 
+/* Documentation page */
+
+#documentation-table {
+    height: 85vh;
+    width: auto;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid white;
+}
+
 /* Blog page */
 
 #blog-title {

@@ -6,6 +6,51 @@
 {% endblock %}
 
 {% block body %}
+    <div id="documentation-container">
+        <div id="documentation-table">
+            <table>
+                <tr>
+                    <th>Software</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{% static 'perception/images/github_logo.png' %}" alt="GitHub Logo" style="height: 5vh; width: 3vw;">
+                        <a href="https://github.com/" target="_blank">GitHub</a>
+                    </td>
+                    <td>A web-based version-control and collaboration platform for software developers</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{% static 'perception/images/qgis_logo.png' %}" alt="QGIS Logo" style="height: 7vh; width: 5vw;">
+                        <a href="https://qgis.org/en/site/" target="_blank">QGIS</a>
+                    </td>
+                    <td>A GIS application</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{% static 'perception/images/postgresql_logo.png' %}" alt="PostgreSQL Logo" style="height: 7vh; width: 5vw;">
+                        <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a>
+                    </td>
+                    <td>A object-relational database system</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{% static 'perception/images/geoserver_logo.png' %}" alt="GeoServer Logo" style="height: 7vh; width: 5vw;">
+                        <a href="http://geoserver.org/" target="_blank">GeoServer</a>
+                    </td>
+                    <td>A server that allows users to share and edit geospatial data</td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="{% static 'perception/images/django_logo.png' %}" alt="Django Logo" style="height: 7vh; width: 5vw;">
+                        <a href="https://www.djangoproject.com/" target="_blank">Django</a>
+                    </td>
+                    <td>A high-level Python web framework</td>
+                </tr>
+            </table>
+        </div>
+    </div>
 {% endblock %}
 
 {% block script %}
