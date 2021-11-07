@@ -1,0 +1,35 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | Blog
+{% endblock %}
+
+{% block body %}
+    <img src="{% static 'perception/images/blog1_1.png' %}" alt="blog1_1">
+    <br>
+    <p>
+        QGIS is an open source software useful for geospatial analysis. This blog aims to expose you to some of QGIS tools useful for the visualization of your GMT320 project.
+    </p>
+    <i>Time Series:</i>
+    <p>
+        This is a useful function that displays geospatial and temporal data. For example, when mapping the distribution of COVID-19 across time and space, a point can be displayed at the corresponding location at the specific time such that a series of points are animated and will show how, where and when the spread occurred. 
+    </p>
+    <p>
+        Click on the image below to see how a time series map can be created using time series animations:
+    </p>
+    <img src="{% static 'perception/images/blog1_2.png' %}" alt="blog1_2">
+    <br>
+    <i>Data Plotly Plugin:</i>
+    <p>
+        This allows the production of D3 graphs of vector layer based on attribute values.  This allows easy configuration and visualization of plots from vector layers, which is a very useful tool for data analysis.  There are nine different plots, this includes bar plots, histograms, scatter plots etc. Most GIS320 students deal with vector layer of the City of Tshwane and analyze variables such as unemployment and other factors such as race, highest level of education etc. A scatter plot could be plotted on QGIS through this plugin to assess the relationship unemployment has with other variables to help detect independent variables for regression. Additionally, it shows the code used which is useful for your web-programming project as you will be able to see how the chart was coded.
+    </p>
+    <p>
+        Click on the image below to view how this plugin can be used
+    </p>
+    <img src="{% static 'perception/images/blog1_3.png' %}" alt="blog1_3">
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'perception/index.js' %}"></script>
+{% endblock %}
