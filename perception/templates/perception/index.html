@@ -7,13 +7,14 @@
 
 {% block body %}
     <div id="home-container">
-        <img src="{% static 'perception/images/home_hatfield.jpg' %}" alt="Home Background" style="height: 85vh; width: auto;">
-        <div id="home-text">
-            VISION STATEMENT 
-            <br>
-            BLUH 
-            <br>
-            BLUH
+        <div id="home-image">
+            <img id="hatfield-image" src="{% static 'perception/images/home_hatfield.jpg' %}" alt="Home Background">
+        </div>
+        <div id="home-text-parent">
+            <div id="home-text-child">
+                <h1>Welcome to GitHubbers</h1>
+                <p>A way to appreciate the Hatfield CID</p>
+            </div>
         </div>
     </div>
 {% endblock %}

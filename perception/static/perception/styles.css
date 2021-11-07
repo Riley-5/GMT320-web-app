@@ -97,16 +97,23 @@ body {
 
 /* Home page */
 
-#home-container {
-    position: relative;
-    text-align: center;
+#hatfield-image {
+    height: 85vh;
+    width: 50vw;
 }
 
-#home-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#home-image {
+    float: right;
+}
+
+#home-text-parent {
+    width: auto;
+    height: 85vh;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Blog page */

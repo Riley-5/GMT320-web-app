@@ -23,7 +23,7 @@ def blog_two(request):
     return render(request, "perception/blog_two.html")
 
 def documents(request):
-    return render(request, "perception/documents.html")
+    return render(request, "perception/documentation.html")
 
 def contact(request):
     return render(request, "perception/contact.html")
