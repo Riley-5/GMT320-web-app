@@ -5,6 +5,7 @@ from django.db.models import Max
 from .models import *
 from .forms import ContactForm
 from django.contrib import messages
+from django.core.mail import send_mail
 import csv, io, operator
 
 # Create your views here.
@@ -33,6 +34,18 @@ def contact(request):
         contact_form = ContactForm(request.POST)
         if contact_form.is_valid():
             contact_form.save()
+            # Send email to user who sent form
+            subject = "Contact Form Message"
+            body = {
+                'intro': f"Good day {contact_form.cleaned_data['name']}",
+                'body': "Thank you for your message! A member of our team members will get back to you as soon as possible.",
+                'outro': "Regards, GitHubbers team"
+            }
+            message = "\n".join(body.values())
+            sender = "githubbers07@gmail.com"
+            recipient = [contact_form.cleaned_data['email_address']]
+
+            send_mail(subject, message, sender, recipient, fail_silently = True)
     
     # New instance of form
     contact_form = ContactForm()
