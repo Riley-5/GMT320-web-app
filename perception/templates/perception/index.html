@@ -16,10 +16,56 @@
                 <p>A way to appreciate the Hatfield CID</p>
             </div>
         </div>
+        <div id="who-are-we">
+            <div id="who-are-we-image">
+                <div id="image-text">
+                    <h2>Who We Are</h2>
+                </div>
+            </div>
+            <div id="who-are-we-text">
+                <h3>We Are GitHubbers</h3>
+                <p>
+                    We are a young and talented group of 3 GMT 320 students from the University of Pretoria with a groundbreaking 
+                    idea designed to get people to understand the significance of having the Hatfield CID and to let everyone know about the 
+                    CID's contribution towards regulating crime.  As GitHubbers, we believe that the CID has the right to know that 
+                    people appreciate the change that they are bringing to our community as well as for the hard work they are doing.
+                </p>
+                <a class="btn btn-outline-light btn-sm" href="{% url 'about_us' %}">Click here for more information about the project</a>
+            </div>
+        </div>
+        <div id="mission-vision-container">
+            <div id="vision">
+                <h3>Vision</h3>
+                <p>Elimate the guess work in decision <br> making with rapid access to <br> information in only a few clicks</p>
+            </div>
+            <div id="mission">
+                <h3>Mission</h3>
+                <p>Changing the world one map at a time</p>
+            </div>
+        </div>
+        <div id="team-container">
+            <div id="team-members">
+                <div id="team-1">
+                    <b>Luna Girmay Asefaw</b>
+                    <p>Group Leader</p>
+                </div>
+                <div id="team-2">
+                    <b>Riley Kamstra</b>
+                    <p>Programmer</p>
+                    <a class="btn btn-outline-light btn-sm" href="{% static 'perception/pdfs/riley_cv.pdf' %}" download>CV</a>
+                </div>
+                <div id="team-3">
+                    <b>Charity Makukule</b>
+                    <p>Hardcopy Specialist</p>
+                </div>
+            </div>
+        </div>
+        <div id="location-map"></div>
     </div>
 {% endblock %}
 
 {% block script %}
     <script src="{% static 'perception/index.js' %}"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
 {% endblock %}
 

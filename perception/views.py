@@ -37,8 +37,8 @@ def contact(request):
             # Send email to user who sent form
             subject = "Contact Form Message"
             body = {
-                'intro': f"Good day {contact_form.cleaned_data['name']}",
-                'body': "Thank you for your message! A member of our team members will get back to you as soon as possible.",
+                'intro': f"Good day {contact_form.cleaned_data['name']}" + "\n",
+                'body': "Thank you for your message! A member of our team members will get back to you as soon as possible." + "\n",
                 'outro': "Regards, GitHubbers team"
             }
             message = "\n".join(body.values())
@@ -46,11 +46,17 @@ def contact(request):
             recipient = [contact_form.cleaned_data['email_address']]
 
             send_mail(subject, message, sender, recipient, fail_silently = True)
+
+            return render(request, "perception/contact.html", {
+                "contact_form": ContactForm()
+            })
+    # If GET request send a blank form
+    else:
+        contact_form = ContactForm()
     
     # New instance of form
-    contact_form = ContactForm()
     return render(request, "perception/contact.html", {
-        "contact_form": ContactForm
+        "contact_form": contact_form
     })
 
 
