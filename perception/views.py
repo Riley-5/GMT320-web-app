@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.db.models import Max
+from django.db.models import Sum
 from .models import *
 from .forms import ContactForm
 from django.contrib import messages
@@ -39,7 +39,7 @@ def contact(request):
             body = {
                 'intro': f"Good day {contact_form.cleaned_data['name']}" + "\n",
                 'body': "Thank you for your message! A member of our team members will get back to you as soon as possible." + "\n",
-                'outro': "Regards, GitHubbers team"
+                'outro': "Regards" + "\n" + "GitHubbers team"
             }
             message = "\n".join(body.values())
             sender = "githubbers07@gmail.com"
@@ -104,37 +104,39 @@ def load_data(request):
 # These items are turned into a list 
 # a JSON object is created and returned 
 def crime_data(request):
+    def get_data(query, index=1):
+        v = []
+        for q in query:
+            v.append(q[index])
+        return v
+
+    keys = [
+        "years",
+        "attempted_murder",
+        "sexual_assault",
+        "vehicle_theft",
+        "shoplifting",
+        "drunk_driving",
+        "damage_to_property"
+    ]
+
+    values = []
     if request.method == "GET":
-        year = list(Crime.objects.values_list('year', flat = True))
-        street_id = list(Crime.objects.values_list('street_id', flat = True))
-        street_name = list(Crime.objects.values_list('street_name', flat = True))
-        attempted_murder = list(Crime.objects.values_list('attempted_murder', flat = True))
-        sexual_assault = list(Crime.objects.values_list('sexual_assault', flat = True))
-        vehicle_theft = list(Crime.objects.values_list('vehicle_theft', flat = True))
-        shoplifting = list(Crime.objects.values_list('shoplifting', flat = True))
-        drunk_driving = list(Crime.objects.values_list('drunk_driving', flat = True))
-        damage_to_property = list(Crime.objects.values_list('damage_to_property', flat = True))
+        first = Crime.objects.values_list('year').annotate(Sum('attempted_murder'))
+        values.append(get_data(first, 0))
+        values.append(get_data(first))
+        values.append(get_data(Crime.objects.values_list('year').annotate(Sum('sexual_assault'))))
+        values.append(get_data(Crime.objects.values_list('year').annotate(Sum('vehicle_theft'))))
+        values.append(get_data(Crime.objects.values_list('year').annotate(Sum('shoplifting'))))
+        values.append(get_data(Crime.objects.values_list('year').annotate(Sum('drunk_driving'))))
+        values.append(get_data(Crime.objects.values_list('year').annotate(Sum('damage_to_property'))))
 
-        crime_data = {
-            'year': year,
-            'street_id': street_id,
-            'street_name': street_name,
-            'attempted_murder': attempted_murder,
-            'attempted_murder_total': sum(attempted_murder),
-            'sexual_assault': sexual_assault,
-            'sexual_assault_total': sum(sexual_assault),
-            'vehicle_theft': vehicle_theft,
-            'vehicle_theft_total': sum(vehicle_theft),
-            'shoplifting': shoplifting,
-            'shoplifting_total': sum(shoplifting),
-            'drunk_driving': drunk_driving,
-            'drunk_driving_total': sum(drunk_driving),
-            'damage_to_property': damage_to_property,
-            'damage_to_property_total': sum(damage_to_property),
-        }
+    crime_data = {}
+    for k, v in zip(keys, values):
+        crime_data[k] = v
 
-        return JsonResponse(crime_data, safe = False)   
-
+    return JsonResponse(crime_data, safe=False)
+    
 # Function gets the most recent years data in the database (19 streets total)
 # Loops through the names and sums the all the crimes for that road
 # returns a JSON object with the crime total for that street

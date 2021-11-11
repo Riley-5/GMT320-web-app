@@ -34,33 +34,54 @@
             </div>
         </div>
         <div id="mission-vision-container">
-            <div id="vision">
-                <h3>Vision</h3>
-                <p>Elimate the guess work in decision <br> making with rapid access to <br> information in only a few clicks</p>
-            </div>
-            <div id="mission">
-                <h3>Mission</h3>
-                <p>Changing the world one map at a time</p>
+            <h2>Mission & Vision</h2>
+            <div id="mission-vision-image-container">
+                <img id="mission-vision-image" src="{% static 'perception/images/vision_mission.png' %}" alt="Vision Mission">
+                <div id="vision">
+                    Elimate the guess work in decision <br> making with rapid access to <br> information in only a few clicks
+                </div>
+                <div id="mission">
+                    Changing the world one map at a time
+                </div>
             </div>
         </div>
         <div id="team-container">
             <div id="team-members">
+                <h2>The Team</h2>
+                <br>
                 <div id="team-1">
                     <b>Luna Girmay Asefaw</b>
-                    <p>Group Leader</p>
+                    <br>
+                    <br>
+                    <img src="{% static 'perception/images/luna_cv_pic.png' %} " alt="Luna pic">
+                    <br>
+                    <br>
+                    <a class="btn btn-outline-light btn-sm" href="{% static 'perception/pdfs/luna_cv.pdf' %}" download>CV</a>
                 </div>
                 <div id="team-2">
                     <b>Riley Kamstra</b>
-                    <p>Programmer</p>
+                    <br>
+                    <br>
+                    <img src="{% static 'perception/images/riley_cv_pic.png' %}" alt="Riley pic">
+                    <br>
+                    <br>
                     <a class="btn btn-outline-light btn-sm" href="{% static 'perception/pdfs/riley_cv.pdf' %}" download>CV</a>
                 </div>
                 <div id="team-3">
                     <b>Charity Makukule</b>
-                    <p>Hardcopy Specialist</p>
+                    <br>
+                    <br>
+                    <img src="{% static 'perception/images/charity_cv_pic.png' %}" alt="Charity pic">
+                    <br>
+                    <br>
+                    <a class="btn btn-outline-light btn-sm" href="{% static 'perception/pdfs/charity_cv.pdf' %}" download>CV</a>
                 </div>
             </div>
         </div>
-        <div id="location-map"></div>
+        <div id="location-container">
+            <h2>Where to find us</h2>
+            <div id="location-map"></div>
+        </div>
     </div>
 {% endblock %}
 

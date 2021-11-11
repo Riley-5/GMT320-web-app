@@ -182,11 +182,11 @@ function graphsCrime(crimeData) {
     var ctx2 = document.querySelector('#canvas-line-graph').getContext('2d');
     var lineChart = new Chart(ctx2, {
         data: {
-            labels: crimeData.year,
+            labels: crimeData.years,
             datasets: [{
                 type: 'line',
                 label: 'Attempted Murder',
-                data: crimeData.attempted_muder,
+                data: crimeData.attempted_murder,
                 backgroundColor: [
                     'rgba(255, 0, 0)',
                 ],

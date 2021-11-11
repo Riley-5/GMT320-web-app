@@ -124,23 +124,34 @@ body {
 
 #mission-vision-container {
     color: white;
-    height: 30vh;
+    height: 75vh;
     text-align: center;
     padding-top: 5vh;
+    position: relative;
+}
+
+#mission-vision-image {
+    height: 65vh;
+    width: 60vw;
 }
 
 #vision {
+    position: absolute;
     width: 49vw;
-    float: left;
+    top: 30vh;
+    left: 12vw;
 }
 
 #mission {
     width: 49vw;
-    float: right;
+    position: absolute;
+    top: 34vh;
+    right: 13vw;
 }
 
 #team-members {
     color: white;
+    text-align: center;
 }
 
 #team-1 {
@@ -162,6 +173,11 @@ body {
     height: 60vh;
     width: 30vw;
     float: left;
+    text-align: center;
+}
+
+#location-container {
+    color: white;
     text-align: center;
 }
 
@@ -205,6 +221,10 @@ body {
     width: 50%;
     float:left;
     text-align: center;
+    margin-bottom: 5vh;
+    border-top: solid 1px white;
+    border-right: solid 1px white;
+    padding-top: 5vh;
 }
 
 #problem-text {
@@ -216,6 +236,9 @@ body {
     width: 50%;
     float: right;
     text-align: center;
+    margin-bottom: 5vh;
+    padding-top: 5vh;
+    border-top: solid 1px white;
 }
 
 #solution-text {
@@ -277,8 +300,35 @@ table, th, td {
     text-align: center;
     border: 1px solid;
     margin: 2vh;
-    width: 50vw;
+    width: 55vw;
+    height: 20vh;
     display: inline-block;
+}
+
+.blog-title {
+    float: right;
+    padding-right: 2vw;
+}
+
+.blog-image-container {
+    float: left;
+    width: 15vw;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+}
+
+.blog-image-cover {
+    height: 18vh;
+    width: 10vw;
 }
 
 .blog:hover {
