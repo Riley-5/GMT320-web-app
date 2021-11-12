@@ -68,26 +68,28 @@ body {
 #side-bar {
     background-color: black;
     height: 60vh;
-    width: 31vw;
+    width: 32.5vw;
     float: left;
 }
+
 #map-container {
     background-color: black;
     height: 60vh;
-    width: 35vw;
+    width: 32.5vw;
     float: left;
 }
 
 #map {
-    height: 53vh;
-    width: 35vw;
+    height: 55vh;
+    width: 32.5vw;
     float: left;
 }
 
 #line-graph {
     background-color: black;
-    height: 28vh;
-    width: auto;
+    height: 60vh;
+    width: 32.5vw;
+    float: left;
 }
 
 #coordinates {
