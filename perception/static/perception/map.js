@@ -30,7 +30,7 @@ function getData() {
 }
 
 function addMap(totalCrimesPerStreet) {
-    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 14);
+    var hatfieldMap = L.map('map').setView([-25.7487, 28.2380], 15);
     hatfieldMap.doubleClickZoom.disable();
 
     var darkTheme = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png', {
@@ -41,6 +41,13 @@ function addMap(totalCrimesPerStreet) {
 	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
+    var hatfieldBoundary = L.tileLayer.wms('http://geolive.co.za:8080/geoserver/githubbers/wms', {
+        layers: '	githubbers:hatfield_boundary',
+        format: 'image/png',
+        transparent: true,
+    }).addTo(hatfieldMap);
+    
+
     // Mouse moves over map displays the coordinates
     mouseOverCoordinates(hatfieldMap);
 
@@ -48,7 +55,7 @@ function addMap(totalCrimesPerStreet) {
     // If in full screen double click to exit
     doubleClickFUllscreen(hatfieldMap);
     
-    addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm);
+    addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm, hatfieldBoundary);
 }
 
 // Mouse moves over map displays the coordinates
@@ -72,7 +79,7 @@ function doubleClickFUllscreen(map) {
     });
 }
 
-function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
+function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm, hatfieldBoundary) {
     var owsrootUrl = 'http://geolive.co.za:8080/geoserver/githubbers/ows';
 
     var defaultParameters = {
@@ -111,24 +118,24 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
                     // 80 <= Crime < 100 then color = orange
                     // Crime < 80 then color = green
                     switch (name) {
-                        case "Arcadia Street": value = crimePerStreetTotal.arcadia_street; break;
-                        case "Athlone Street": value = crimePerStreetTotal.athlone_street; break;
-                        case "Burnett Street": value = crimePerStreetTotal.burnett_street; break;
-                        case "End Street": value = crimePerStreetTotal.end_street; break;
-                        case "Festival Street": value = crimePerStreetTotal.festival_street; break;
-                        case "Francis Baard Street": value = crimePerStreetTotal.francis_baard_street; break;
-                        case "Glyn Street South": value = crimePerStreetTotal.glyn_street_south; break;
-                        case "Gordon Road": value = crimePerStreetTotal.gordon_road; break;
-                        case "Grosvenor Street": value = crimePerStreetTotal.grosvenor_street; break;
-                        case "Hartbeestspruit Street": value = crimePerStreetTotal.hartbeestspruit_street; break;
-                        case "Hilda Street": value = crimePerStreetTotal.hilda_street; break;
-                        case "Jan Shoba Street": value = crimePerStreetTotal.jan_shoba_street; break;
-                        case "Park Street": value = crimePerStreetTotal.park_street; break;
-                        case "Pretorius Street": value = crimePerStreetTotal.pretorius_street; break;
-                        case "Prospect Street": value = crimePerStreetTotal.prospect_street; break;
-                        case "Richard Street": value = crimePerStreetTotal.richard_street; break;
-                        case "South Street": value = crimePerStreetTotal.south_street; break;
-                        case "Stanza Bobape Street": value = crimePerStreetTotal.stanza_bobape_street; break;
+                        case "Arcadia Street": value = crimePerStreetTotal['Arcadia Street']; break;
+                        case "Athlone Street": value = crimePerStreetTotal['Athlone Street']; break;
+                        case "Burnett Street": value = crimePerStreetTotal['Burnett Street']; break;
+                        case "End Street": value = crimePerStreetTotal['End Street']; break;
+                        case "Festival Street": value = crimePerStreetTotal['Festival Street']; break;
+                        case "Francis Baard Street": value = crimePerStreetTotal['Francis Baard Street']; break;
+                        case "Glyn Street South": value = crimePerStreetTotal['Glyn Street South']; break;
+                        case "Gordon Road": value = crimePerStreetTotal['Gordon Road']; break;
+                        case "Grosvenor Street": value = crimePerStreetTotal['Grosvenor Street']; break;
+                        case "Hartbeestspruit Street": value = crimePerStreetTotal['Hartbeestspruit Street']; break;
+                        case "Hilda Street": value = crimePerStreetTotal['Hilda Street']; break;
+                        case "Jan Shoba Street": value = crimePerStreetTotal['Jan Shoba Street']; break;
+                        case "Park Street": value = crimePerStreetTotal['Park Street']; break;
+                        case "Pretorius Street": value = crimePerStreetTotal['Pretorius Street']; break;
+                        case "Prospect Street": value = crimePerStreetTotal['Prospect Street']; break;
+                        case "Richard Street": value = crimePerStreetTotal['Richard Street']; break;
+                        case "South Street": value = crimePerStreetTotal['South Street']; break;
+                        case "Stanza Bobape Street": value = crimePerStreetTotal['Stanza Bobape Street']; break;
                         default: value = 0;
                     }
 
@@ -150,7 +157,7 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm) {
                 }
             }).addTo(map);
             popUp(WFSLayer);
-            layerController(map, darkTheme, osm, WFSLayer);
+            layerController(map, darkTheme, osm, WFSLayer, hatfieldBoundary);
         }
     });
 }
@@ -163,14 +170,15 @@ function popUp(roads) {
 }
 
 // Layer controller to toggle between basemaps and overlay maps
-function layerController(map, darkTheme, osm, WFSLayer) {
+function layerController(map, darkTheme, osm, WFSLayer, hatfieldBoundary) {
     var baseMaps = {
         "Dark Theme": darkTheme,
         "OSM": osm
     }
 
     var overlayMaps = {
-        "Roads": WFSLayer
+        "Roads": WFSLayer,
+        "Hatfield Boundary": hatfieldBoundary
     }
 
     L.control.layers(baseMaps, overlayMaps).addTo(map);
@@ -303,13 +311,24 @@ function graphsCrimeStreet(totalCrimeStreet) {
         green: 'rgba(0, 255, 0)'
     };
 
+    var labels = Object.keys(totalCrimeStreet);
+    labels = labels.filter((element, index) => index < labels.length - 1);
+
+    var data = Object.values(totalCrimeStreet);
+    data = data.filter((element, index) => index < data.length - 1);
+
+    var latestYear = totalCrimeStreet.year;
+    if (latestYear === null) {
+        latestYear = '(Year)';
+    }
+
     var ctx = document.querySelector('#canvas-side-bar').getContext('2d');
     var barChart = new Chart(ctx, {
         data: {
-            labels: Object.keys(totalCrimeStreet),
+            labels: labels,
             datasets: [{
                 type: 'bar',
-                data: Object.values(totalCrimeStreet),
+                data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -337,7 +356,7 @@ function graphsCrimeStreet(totalCrimeStreet) {
                 },
                 title: {
                     display: true,
-                    text: 'Total Crime Per Street',
+                    text: `Total Crime Per Street For ${latestYear}`,
                     color: 'white'
                 }
             },

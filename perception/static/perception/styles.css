@@ -67,29 +67,31 @@ body {
 
 #side-bar {
     background-color: black;
-    height: 60vh;
-    width: 32.5vw;
+    height: 86vh;
+    width: 25vw;
     float: left;
+    padding-left: 1vw;
 }
 
 #map-container {
     background-color: black;
-    height: 60vh;
-    width: 32.5vw;
+    height: 86vh;
+    width: 50vw;
     float: left;
 }
 
 #map {
-    height: 55vh;
-    width: 32.5vw;
+    height: 82vh;
+    width: 50vw;
     float: left;
 }
 
 #line-graph {
     background-color: black;
-    height: 60vh;
-    width: 32.5vw;
+    height: 86vh;
+    width: 23vw;
     float: left;
+    padding-left: 1vw;
 }
 
 #coordinates {
@@ -122,6 +124,9 @@ body {
     color: white;
     text-align: center;
     padding-top: 2vh;
+    border: solid 1px white;
+    padding-bottom: 2vh;
+    margin-top: 2vh;
 }
 
 #mission-vision-container {
@@ -130,6 +135,9 @@ body {
     text-align: center;
     padding-top: 5vh;
     position: relative;
+    border-left: solid 1px white;
+    border-right: solid 1px white;
+    border-bottom: solid 1px white;
 }
 
 #mission-vision-image {
@@ -151,29 +159,33 @@ body {
     right: 13vw;
 }
 
-#team-members {
+#team-container {
     color: white;
     text-align: center;
+    padding-top: 2vh;
+    border-left: solid 1px white;
+    border-right: solid 1px white;
+    border-bottom: solid 1px white;
+    height: 65vh;
 }
 
 #team-1 {
-    margin-left: 4vw;
     height: 60vh;
-    width: 30vw;
+    width: 32vw;
     float: left;
     text-align: center;
 }
 
 #team-2 {
     height: 60vh;
-    width: 30vw;
+    width: 32vw;
     float: left;
     text-align: center;
 }
 
 #team-3 {
     height: 60vh;
-    width: 30vw;
+    width: 32vw;
     float: left;
     text-align: center;
 }
@@ -335,15 +347,6 @@ table, th, td {
 
 .blog:hover {
     transform: scale(1.25, 1.25);
-}
-
-a {
-    color: white;
-}
-
-a:hover {
-    color: white;
-    text-decoration: none;
 }
 
 p {

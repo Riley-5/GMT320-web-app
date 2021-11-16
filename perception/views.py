@@ -37,7 +37,7 @@ def contact(request):
             # Send email to user who sent form
             subject = "Contact Form Message"
             body = {
-                'intro': f"Good day {contact_form.cleaned_data['name']}" + "\n",
+                'intro': f"Good day {contact_form.cleaned_data['name'].capitalize()}" + "\n",
                 'body': "Thank you for your message! A member of our team members will get back to you as soon as possible." + "\n",
                 'outro': "Regards" + "\n" + "GitHubbers team"
             }
@@ -147,9 +147,12 @@ def total_crimes(request):
 
         for name in street_names:
             street_crime_sum = Crime.objects.filter(street_name = name).values_list('attempted_murder', 'sexual_assault', 'vehicle_theft', 'shoplifting', 'drunk_driving', 'damage_to_property').order_by('-id')[:19]
-            sum_crime_street[(name.replace(" ", "_")).lower()] = sum(street_crime_sum[0])
+            sum_crime_street[(name)] = sum(street_crime_sum[0])
         
-        sorted_sum_crime_street = dict(sorted(sum_crime_street.items(), key = operator.itemgetter(1), reverse = True))
+        sorted_sum_crime_street = dict(sorted(sum_crime_street.items()))
+
+        latest_year = Crime.objects.values_list('year', flat = True).last()
+        sorted_sum_crime_street['year'] = latest_year
 
         return JsonResponse(sorted_sum_crime_street, safe = False)
 
