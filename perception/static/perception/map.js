@@ -55,22 +55,6 @@ function addMap(totalCrimesPerStreet) {
     doubleClickFUllscreen(hatfieldMap);
     
     addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm, hatfieldBoundary);
-
-    var searchControl = new L.esri.Controls.Geosearch().addTo(hatfieldMap);
-
-    var results= new L.LayerGroup().addTo(hatfieldMap);
-
-    searchControl.on('results', function(data) {
-        results.clearLayers();
-        for (var i = data.results.length - 1; i >= 0; i--) {
-            results.addLayer(L.marker(data.results[i].latlng));
-          }
-    });
-
-    // Click on map to remove searched point
-    hatfieldMap.on('click', function() {
-        results.clearLayers();
-    })
 }
 
 // Mouse moves over map displays the coordinates
@@ -171,17 +155,29 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm, hatfieldBoundary)
                     }
                 }
             }).addTo(map);
-            popUp(WFSLayer);
+            searchPopup(map, WFSLayer);
             layerController(map, darkTheme, osm, WFSLayer, hatfieldBoundary);
         }
     });
 }
 
-// When road clicked on display the road name
-function popUp(roads) {    
-    roads.eachLayer(function (layer) {
-        layer.bindPopup(layer.feature.properties.streetname);
+function searchPopup(map, layer) {
+    var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+    var results= new L.LayerGroup().addTo(map);
+
+    searchControl.on('results', function(data) {
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+            var popup = L.popup().setLatLng(data.results[i].latlng).setContent(data.results[0].text).openOn(map);
+            results.addLayer(popup);
+        }
     });
+
+    // Click on map to remove searched point
+    map.on('click', function() {
+        results.clearLayers();
+    })
 }
 
 // Layer controller to toggle between basemaps and overlay maps

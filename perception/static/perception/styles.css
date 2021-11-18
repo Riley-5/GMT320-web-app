@@ -185,6 +185,11 @@ body {
     text-align: center;
 }
 
+#team-1-image {
+    height: 30vh;
+    width: 8vw;
+}
+
 #team-2 {
     height: 60vh;
     width: 32vw;
@@ -192,11 +197,21 @@ body {
     text-align: center;
 }
 
+#team-2-image {
+    height: 30vh;
+    width: 15vw;
+}
+
 #team-3 {
     height: 60vh;
     width: 32vw;
     float: left;
     text-align: center;
+}
+
+#team-3-image {
+    height: 30vh;
+    width: 15vw;
 }
 
 #location-container {
