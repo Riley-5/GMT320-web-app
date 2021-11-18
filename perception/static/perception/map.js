@@ -155,13 +155,13 @@ function addWFSLayer(map, crimePerStreetTotal, darkTheme, osm, hatfieldBoundary)
                     }
                 }
             }).addTo(map);
-            searchPopup(map, WFSLayer);
+            searchPopup(map);
             layerController(map, darkTheme, osm, WFSLayer, hatfieldBoundary);
         }
     });
 }
 
-function searchPopup(map, layer) {
+function searchPopup(map) {
     var searchControl = new L.esri.Controls.Geosearch().addTo(map);
 
     var results= new L.LayerGroup().addTo(map);
