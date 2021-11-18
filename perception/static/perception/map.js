@@ -46,7 +46,6 @@ function addMap(totalCrimesPerStreet) {
         format: 'image/png',
         transparent: true,
     }).addTo(hatfieldMap);
-    
 
     // Mouse moves over map displays the coordinates
     mouseOverCoordinates(hatfieldMap);
@@ -56,6 +55,22 @@ function addMap(totalCrimesPerStreet) {
     doubleClickFUllscreen(hatfieldMap);
     
     addWFSLayer(hatfieldMap, totalCrimesPerStreet, darkTheme, osm, hatfieldBoundary);
+
+    var searchControl = new L.esri.Controls.Geosearch().addTo(hatfieldMap);
+
+    var results= new L.LayerGroup().addTo(hatfieldMap);
+
+    searchControl.on('results', function(data) {
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+            results.addLayer(L.marker(data.results[i].latlng));
+          }
+    });
+
+    // Click on map to remove searched point
+    hatfieldMap.on('click', function() {
+        results.clearLayers();
+    })
 }
 
 // Mouse moves over map displays the coordinates
