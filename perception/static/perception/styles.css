@@ -65,6 +65,15 @@ body {
     color: white;
 }
 
+.geocoder-control-suggestions .geocoder-control-suggestion {
+    color: black;
+}
+
+.geocoder-control-suggestions:hover .geocoder-control-suggestion:hover {
+    color: white;
+    background-color: black;
+}
+
 #side-bar {
     background-color: black;
     height: 86vh;
