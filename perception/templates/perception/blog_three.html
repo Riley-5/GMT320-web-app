@@ -1,0 +1,64 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | Blog
+{% endblock %}
+
+{% block body %}
+<div style="padding-left: 1vw;">
+    <a class ="btn btn-outline-light btn-sm" href="{% url 'blog' %}">Back</a>
+    
+    <h3 style="color: white;">Tips For a Successful Project</h3>
+    <br>
+    <b style="color: white;">Here are some of the Project Management Tools to use for a successful project</b>
+    <br>
+    <br>
+    <i>Work Breakdown Structure:</i>
+    <P>
+        In project management and systems engineering, a work-breakdown structure (WBS) is a deliverable-oriented breakdown of a project into smaller components. 
+        A work breakdown structure is a critical project deliverable that divides the work of the team into manageable chunks. 
+        The work-breakdown structure is defined by the Project Management Body of Knowledge (PMBOK 5) as a "hierarchical decomposition of the overall 
+        scope of work to be carried out by the project team to achieve the project objectives and create the requisite deliverables."
+    </P>
+    <i>How it helped our group:</i>
+    <p>
+        We were able to identify the work that is required or what we must perform, 
+        and allocating effort estimates to specific portions of the WBS aided in the rapid construction of a timeline. 
+        We utilized it to demonstrate and assign accountabilities and tasks to each team member because it provided a visual of the complete project scope. 
+        Furthermore, it served as a tool for group brainstorming and collaboration.
+    </p>
+    <i>Trello:</i>
+    <p>
+        Trello is a project management app that divides your projects into boards. Trello tells you what's being worked on, 
+        who's working on it, and where something is in the process all at one glance. Consider a white board covered in lists of sticky notes, 
+        each one representing a task for you and your team.
+        <br>
+        Trello adapts to any project, whether you and your team are starting something new or attempting to get more organized with your current work. 
+        It intuitively simplifies and standardizes the work process of your team. But don't be fooled by its simplicity! 
+        Trello is simple to use while still being capable of handling your team's most complex projects.
+    </p>
+    <i>Our experiance using Trello:</i>
+    <p>
+        It is an easy tool to use we did not take time to adapt to the app and be able to use it for our project. 
+        It was as simple as it gets, making it ideal for a small group like us seeking for a no-brainer option. 
+        Even non-technical users will have no trouble navigating the platform, that’s another advantage of this application. 
+        We were also happy to learn that this app has an excellent free plan. Despite its simplicity, we also liked its automation tools as they are 
+        generous and just as easy to set up. Trello excels at team collaboration, which is at the heart of project management. It includes a variety of 
+        collaboration options, such as comments, document sharing, teammates @mentions, and notifications this helped us a lot in tracking each other’s work progress.
+    </p>
+    <i>Time Sheet:</i>
+    <p>
+        A timesheet is a way of keeping track of how much time a worker spends on each job. 
+        This information can be recorded on paper or a spreadsheet.
+    </p>
+    <i>Benefits:</i>
+    <p>
+        They are helpful in measuring the overall efficiency of your project and reduce time wastage
+    </p>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'perception/index.js' %}"></script>
+{% endblock %}
