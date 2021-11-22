@@ -31,6 +31,9 @@ def blog_three(request):
 def blog_four(request):
     return render(request, "perception/blog_four.html")
 
+def hardcopy_map(request):
+    return render(request, "perception/hardcopy_map.html")
+
 def documents(request):
     return render(request, "perception/documentation.html")
 

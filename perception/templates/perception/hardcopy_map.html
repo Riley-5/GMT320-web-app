@@ -1,0 +1,63 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | Maps
+{% endblock %}
+
+{% block body %}
+<div id="hardcopy-map-container">
+    <h1 style="color: white;">Hardcopy Maps</h1>
+    <br>
+    <div id="map-1-container">
+        <img id="map-1" src="{% static 'perception/images/cid_2.png' %}" alt="map 1">
+    </div>
+    <br>
+    <div id="map-2-container">
+        <img id="map-2" src="{% static 'perception/images/comparison_3.PNG' %}" alt="map 2">
+    </div>
+    <br>
+    <div id="map-3-container">
+        <img id="map-3" src="{% static 'perception/images/final_buildings.PNG' %}" alt="map 3">
+    </div>
+</div>
+<div id="street-compare-container">
+    <br>
+    <div id="map-4-container">
+        <img id="map-4" src="{% static 'perception/images/final_2003.png' %}" alt="map 4">
+    </div>
+    <div id="map-5-container">
+        <img id="map-5" src="{% static 'perception/images/final_2021.png' %}" alt="map 5">
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            mapOne = document.querySelector('#map-1');
+            fullscreenHardcopy(mapOne);
+            mapTwo = document.querySelector('#map-2');
+            fullscreenHardcopy(mapTwo);
+            mapThree = document.querySelector('#map-3');
+            fullscreenHardcopy(mapThree);
+            mapFour = document.querySelector('#map-4');
+            fullscreenHardcopy(mapFour);
+            mapFive = document.querySelector('#map-5');
+            fullscreenHardcopy(mapFive);
+
+
+            function fullscreenHardcopy (mapName) {
+                mapName.addEventListener('click', () => {
+                    if (document.fullscreenElement) {
+                        document.exitFullscreen();
+                    }
+                    else {
+                        mapName.requestFullscreen();
+                    }
+                });
+            }
+        })
+    </script>
+{% endblock %}

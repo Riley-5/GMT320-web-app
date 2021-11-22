@@ -10,6 +10,7 @@ urlpatterns = [
     path("blog_three", views.blog_three, name="blog_three"),
     path("blog_four", views.blog_four, name="blog_four"),
     path("documents", views.documents, name="documents"),
+    path("hardcopy_map", views.hardcopy_map, name="hardcopy_map"),
     path("contact", views.contact, name="contact"),
     path("load_data", views.load_data, name="load_data"),
     path("map", views.map, name="map"),

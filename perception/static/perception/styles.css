@@ -320,6 +320,65 @@ table, th, td {
     border: 1px solid white;
 }
 
+/* Hardcopy maps page */
+
+#hardcopy-map-container {
+    text-align: center;
+}
+
+#map-1 {
+    height: 70vh;
+    width: 50vw;
+}
+
+#map-1:hover {
+    transform: scale(1.25, 1.25);
+}
+
+#map-2 {
+    height: 70vh;
+    width: 50vw;
+}
+
+#map-2:hover {
+    transform: scale(1.25, 1.25);
+}
+
+#map-3 {
+    height: 70vh;
+    width: 50vw;
+}
+
+#map-3:hover {
+    transform: scale(1.25, 1.25);
+}
+
+#map-4-container {
+    float: left;
+}
+
+#map-4 {
+    height: 70vh;
+    width: 48vw;
+}
+
+#map-4:hover {
+    transform: scale(1.25, 1.25);
+}
+
+#map-5-container {
+    float: right;
+}
+
+#map-5 {
+    height: 70vh;
+    width: 48vw;
+}
+
+#map-5:hover {
+    transform: scale(1.25, 1.25);
+}
+
 /* Blog page */
 
 #blog-title {
