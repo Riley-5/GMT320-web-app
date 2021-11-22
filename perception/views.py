@@ -28,6 +28,9 @@ def blog_two(request):
 def blog_three(request):
     return render(request, "perception/blog_three.html")
 
+def blog_four(request):
+    return render(request, "perception/blog_four.html")
+
 def documents(request):
     return render(request, "perception/documentation.html")
 

@@ -1,0 +1,40 @@
+{% extends "perception/layout.html" %}
+{% load static %}
+
+{% block title %}
+    | Blog
+{% endblock %}
+
+{% block body %}
+<div style="padding-left: 1vw;">
+    <h3 style="color: white;">Keep your head up, it's just constructive criticism</h3>
+    <br>
+    <strong style="color: white;">person: *gives me constructive criticism*</strong>
+    <br>
+    <strong style="color: white;">me:</strong>
+    <br>
+    <img src="{% static 'perception/images/blog4_1.png' %}" alt="criticism pic">
+    <br>
+    <br>
+    <p>
+        Surely, I am writing this blog with tears in my eyes, lol. 
+        After the feedback of demo 1, we had to redo most of our hardcopy maps. Initially, it felt discouraging because of the realisation that we 
+        were completely missing the goal. It may seem overwhelming at first but trust in the process. I found constructive criticism to be extremely helpful. 
+        My group continuously worked together to assess every output and communicate with the lecturer on what to fix.  
+        At the end of demo 2, there was a 20% increase in our marks from demo 1 because we took the constructive feedback into consideration and created 
+        outputs that were aligned with it. 
+    </p>
+    <p>
+        My message to you, future GMT 320 Students, is to not be overwhelmed by the criticism. 
+        It is there to correct the mistakes you may have overlooked and guide you towards your goal.  
+        It is better to rather find out what you did wrong in demo 1 than on the final presentation with external examiners.
+    </p>
+    <p>
+        Githubbers wishes you all the best!
+    </p>
+</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'perception/index.js' %}"></script>
+{% endblock %}
