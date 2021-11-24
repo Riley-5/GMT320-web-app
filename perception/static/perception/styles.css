@@ -332,7 +332,7 @@ table, th, td {
 }
 
 #map-1:hover {
-    transform: scale(1.25, 1.25);
+    border: solid 5px rgb(0, 255, 0);
 }
 
 #map-2 {
@@ -341,7 +341,7 @@ table, th, td {
 }
 
 #map-2:hover {
-    transform: scale(1.25, 1.25);
+    border: solid 5px rgb(0, 255, 0);
 }
 
 #map-3 {
@@ -350,7 +350,7 @@ table, th, td {
 }
 
 #map-3:hover {
-    transform: scale(1.25, 1.25);
+    border: solid 5px rgb(0, 255, 0);
 }
 
 #map-4-container {
@@ -363,7 +363,7 @@ table, th, td {
 }
 
 #map-4:hover {
-    transform: scale(1.25, 1.25);
+    border: solid 5px rgb(0, 255, 0);
 }
 
 #map-5-container {
@@ -376,7 +376,7 @@ table, th, td {
 }
 
 #map-5:hover {
-    transform: scale(1.25, 1.25);
+    border: solid 5px rgb(0, 255, 0);
 }
 
 /* Blog page */

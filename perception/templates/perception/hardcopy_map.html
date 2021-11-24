@@ -52,8 +52,19 @@
                 mapName.addEventListener('click', () => {
                     if (document.fullscreenElement) {
                         document.exitFullscreen();
+                        mapName.addEventListener('mouseover', mouseOver);
+                        mapName.addEventListener('mouseout', mouseOut);
+
+                        function mouseOver() {
+                            mapName.style.border = "solid 5px rgb(0, 255, 0)";
+                        }
+
+                        function mouseOut() {
+                            mapName.style.border = "none";
+                        }
                     }
                     else {
+                        mapName.style.border = "none";
                         mapName.requestFullscreen();
                     }
                 });
