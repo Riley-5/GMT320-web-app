@@ -158,8 +158,9 @@ body {
 
 #orange-label {
     float: left;
-    padding-left: 1vw;
     color: white;
+    padding-right: 1vw;
+    padding-left: 1vw;
 }
 
 #green {
