@@ -61,6 +61,11 @@ body {
 
 /* Map page */
 
+#disclaimer {
+    width: 98vw;
+    text-align: center;
+}
+
 #message {
     color: white;
 }
@@ -111,9 +116,7 @@ body {
 #legend {
     width: 98vw;
     height: 5vh;
-    position: absolute;
     bottom: 0;
-    border: solid 1px white;
 }
 
 #red {
@@ -123,6 +126,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top: solid 1px white;
+    border-left: solid 1px white;
+    border-bottom: solid 1px white;
 }
 
 #code-red {
@@ -147,6 +153,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top: solid 1px white;
+    border-bottom: solid 1px white;
 }
 
 #code-orange {
@@ -170,6 +178,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-top: solid 1px white;
+    border-right: solid 1px white;
+    border-bottom: solid 1px white;
 }
 
 #code-green {
